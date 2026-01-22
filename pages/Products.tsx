@@ -1,159 +1,128 @@
 
 import React from 'react';
-import { Banana, CheckCircle2, Zap, Star, Award } from 'lucide-react';
+import { Banana, CheckCircle2, Zap, Star, Award, ImagePlus, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { PRODUCTS } from '../constants';
 
 const Products: React.FC = () => {
-  const flavors = [
-    "Bananada Natural",
-    "Bananada com Ameixa",
-    "Bananada com Uva-Passa",
-    "Bananada com Açaí",
-    "Bananada com Castanha-do-Pará"
-  ];
-
   return (
     <div className="pt-24 pb-20 bg-[#FFFBEB] min-h-screen">
       <div className="container mx-auto px-4">
         
-        {/* Banner Superior - Pacotes de 280g */}
+        {/* Banner Superior - Contexto */}
         <div className="flex justify-center mb-16">
           <div className="bg-[#4B3621] px-12 py-3 rounded-xl shadow-xl transform -rotate-1 relative overflow-hidden group">
             <div className="absolute inset-0 bg-white/5 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
             <h2 className="text-white text-2xl md:text-3xl font-black uppercase tracking-widest relative z-10">
-              Pacotes de 280g
+              Catálogo de Produtos
             </h2>
-            <p className="text-[#F7E500] text-center text-sm font-bold uppercase relative z-10">Em todos os sabores</p>
+            <p className="text-[#F7E500] text-center text-sm font-bold uppercase relative z-10">Qualidade Industrial • Sabor Natural</p>
           </div>
         </div>
 
-        {/* Layout Principal Estilo Infográfico Aberto */}
-        <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Coluna Esquerda: Sabores Principais */}
-          <div className="lg:col-span-3 space-y-8">
-            <h3 className="text-[#4B3621] font-black uppercase text-xl mb-4 border-b-4 border-[#F7E500] inline-block">
-              Nossos Sabores
-            </h3>
-            <div className="space-y-6">
-              {flavors.map((flavor, index) => (
-                <div key={index} className="flex items-center group cursor-default">
-                  <div className="bg-[#4B3621] text-[#F7E500] p-2 rounded-lg mr-4 group-hover:scale-110 transition-transform shadow-lg">
-                    <Banana size={20} />
+        {/* Grid de Produtos - Espaços para Imagens */}
+        <div className="max-w-7xl mx-auto mb-24">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {PRODUCTS.map((product) => (
+              <div key={product.id} className="bg-white rounded-[3rem] p-6 border-2 border-transparent hover:border-[#F7E500] transition-all shadow-lg hover:shadow-2xl group flex flex-col h-full">
+                
+                {/* Espaço para Imagem do Produto */}
+                <div className="relative aspect-square mb-8 bg-gray-50 rounded-[2.5rem] border-4 border-dashed border-gray-100 flex items-center justify-center overflow-hidden group-hover:bg-yellow-50/50 transition-colors">
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-4" />
+                  ) : (
+                    <div className="text-center p-8">
+                      <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <ImagePlus className="text-gray-300 group-hover:text-[#F7E500]" size={32} />
+                      </div>
+                      <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">Espaço para Foto</p>
+                      <p className="text-[9px] font-bold text-gray-300 uppercase mt-1">{product.name}</p>
+                    </div>
+                  )}
+                  
+                  {/* Badge de Destaque */}
+                  <div className="absolute top-4 right-4 bg-[#4B3621] text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+                    {product.weight}
                   </div>
-                  <span className="font-black text-[#4B3621] uppercase text-sm md:text-base leading-tight group-hover:text-amber-700 transition-colors">
-                    {flavor}
-                  </span>
                 </div>
-              ))}
-            </div>
-            
-            <div className="mt-12 bg-white/50 p-6 rounded-3xl border-2 border-dashed border-[#4B3621]/20 inline-block shadow-sm">
-               <p className="text-[10px] font-black uppercase text-[#4B3621] opacity-60 mb-1">Unidades de:</p>
-               <span className="text-3xl font-black text-[#4B3621]">28g</span>
-            </div>
-          </div>
 
-          {/* Coluna Central: Marca e Imagem de Impacto */}
-          <div className="lg:col-span-6 flex flex-col items-center py-10 relative">
-            {/* Elementos de Marca Decoupled */}
-            <div className="text-center z-10 flex flex-col items-center w-full">
-              <div className="mb-4 flex items-center gap-4">
-                <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#4B3621]/30"></div>
-                <p className="text-[#4B3621] font-black italic uppercase text-xl tracking-wide leading-none">
-                  Sabor que nutre
-                </p>
-                <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#4B3621]/30"></div>
+                {/* Info do Produto */}
+                <div className="flex-grow text-center px-4">
+                  <div className="flex justify-center mb-2">
+                    <div className="flex gap-1">
+                      {[1,2,3,4,5].map(s => <Star key={s} size={10} className="fill-[#F7E500] text-[#F7E500]" />)}
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-[#4B3621] uppercase leading-tight mb-2 group-hover:text-amber-800 transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">{product.packaging}</p>
+                  
+                  <div className="space-y-2 mb-8">
+                    {product.benefits.map((benefit, i) => (
+                      <div key={i} className="flex items-center justify-center gap-2 text-[11px] font-black text-[#4B3621]/70 uppercase">
+                        <CheckCircle2 size={12} className="text-green-500" />
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Botão de CTA por Produto */}
+                <Link 
+                  to="/contato" 
+                  className="mt-auto bg-gray-50 hover:bg-[#4B3621] text-[#4B3621] hover:text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all border-2 border-gray-100 hover:border-[#4B3621] flex items-center justify-center gap-2"
+                >
+                  <ShoppingBag size={14} />
+                  Solicitar Cotação
+                </Link>
               </div>
-              
-              <h1 className="text-5xl md:text-7xl font-black text-[#4B3621] uppercase tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.05)] leading-tight mb-2">
-                BANANUTRY
-              </h1>
-              
-              <p className="text-[#4B3621]/40 font-black uppercase tracking-[0.6em] mb-10 text-xs md:text-sm">
-                QUALIDADE DESDE 2005
+            ))}
+          </div>
+        </div>
+
+        {/* Destaque de Lançamento e Imagem de Impacto (Layout Antigo Preservado) */}
+        <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-center bg-white/50 p-12 rounded-[4rem] border-2 border-white mb-20">
+          <div className="lg:col-span-6 text-center lg:text-left">
+            <div className="mb-4 flex items-center justify-center lg:justify-start gap-4">
+              <p className="text-[#4B3621] font-black italic uppercase text-xl tracking-wide">
+                Qualidade Industrial
               </p>
-
-              {/* Selo PRODUTOS PRÊMIOS */}
-              <div className="mb-12 bg-[#4B3621] text-[#F7E500] px-10 py-4 rounded-full font-black uppercase text-base tracking-[0.25em] shadow-2xl flex items-center gap-3 transform -rotate-1 hover:rotate-0 transition-all border-b-4 border-black/20 active:translate-y-1">
-                <span className="bg-amber-400 p-1 rounded-full"><Award size={20} className="text-[#4B3621]" /></span>
-                PRODUTOS PRÊMIOS
-              </div>
-              
-              {/* Imagem de Bananas de ALTO IMPACTO */}
-              <div className="relative w-full max-w-lg aspect-video group">
-                <div className="absolute inset-0 bg-[#F7E500]/30 rounded-full blur-[120px] opacity-40 group-hover:opacity-70 transition-opacity duration-700"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1528825876-01087782d558?auto=format&fit=crop&q=80&w=1200" 
-                  alt="Bananas Premium Bananutry" 
-                  className="relative z-10 w-full h-full object-contain drop-shadow-[0_45px_45px_rgba(0,0,0,0.3)] transform hover:scale-105 transition-all duration-700 ease-out cursor-zoom-in"
-                />
-              </div>
-
-              <div className="mt-20 text-[#4B3621] font-black uppercase tracking-[0.4em] bg-white/80 backdrop-blur-md px-14 py-6 rounded-full border-2 border-white shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(247,229,0,0.2)] transition-shadow">
-                 O doce da fruta em sua melhor forma
-              </div>
+              <div className="h-[2px] w-12 bg-[#F7E500]"></div>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-[#4B3621] uppercase tracking-tighter mb-4">
+              BANANUTRY
+            </h1>
+            <p className="text-lg font-medium text-gray-600 mb-8 max-w-md">
+              Processos controlados e matéria-prima selecionada para garantir o melhor doce de banana do mercado.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+               <div className="bg-[#4B3621] text-[#F7E500] px-6 py-3 rounded-full font-black uppercase text-xs flex items-center gap-2">
+                 <Award size={18} /> Fornecedor Ouro
+               </div>
+               <div className="bg-[#F7E500] text-[#4B3621] px-6 py-3 rounded-full font-black uppercase text-xs">
+                 100% Nacional
+               </div>
             </div>
           </div>
-
-          {/* Coluna Direita: Lançamento Balas */}
-          <div className="lg:col-span-3 space-y-8">
-            <div className="bg-white p-8 rounded-[3rem] border-4 border-[#F7E500] shadow-2xl relative overflow-hidden group">
-              <div className="absolute -top-10 -right-10 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Star size={200} className="text-[#4B3621]" />
-              </div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-4">
-                  <Zap className="text-[#4B3621]" fill="#4B3621" size={24} />
-                  <h3 className="text-[#4B3621] font-black uppercase text-xl">Lançamento!</h3>
-                </div>
-                
-                <h4 className="text-3xl font-black text-[#4B3621] uppercase mb-4 leading-none group-hover:text-amber-800 transition-colors">
-                  Balas de Banana
-                </h4>
-                
-                <p className="text-xs font-bold text-gray-500 mb-6 uppercase leading-tight">
-                  A nutrição que você já conhece, agora também na versão de balas
-                </p>
-
-                <div className="space-y-3">
-                  <p className="text-[10px] font-black uppercase text-[#4B3621] opacity-60">Nos tamanhos:</p>
-                  <div className="flex items-center justify-between bg-yellow-50 p-3 rounded-xl border border-yellow-100 hover:border-yellow-400 transition-colors cursor-default">
-                    <span className="font-black text-[#4B3621]">150g</span>
-                    <CheckCircle2 size={18} className="text-green-600" />
-                  </div>
-                  <div className="flex items-center justify-between bg-yellow-50 p-3 rounded-xl border border-yellow-100 hover:border-yellow-400 transition-colors cursor-default">
-                    <span className="font-black text-[#4B3621]">250g</span>
-                    <CheckCircle2 size={18} className="text-green-600" />
-                  </div>
-                  <div className="flex items-center justify-between bg-yellow-50 p-3 rounded-xl border border-yellow-100 hover:border-yellow-400 transition-colors cursor-default">
-                    <span className="font-black text-[#4B3621]">500g</span>
-                    <CheckCircle2 size={18} className="text-green-600" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Selo Zero Açúcar (Canto Inferior Direito) */}
-            <div className="bg-[#4B3621] p-6 rounded-[2rem] text-center transform rotate-2 shadow-2xl hover:rotate-0 transition-transform cursor-pointer border-2 border-white/10 group">
-               <div className="text-[#F7E500] font-black italic text-3xl leading-none mb-1 group-hover:scale-105 transition-transform">Zero Açúcar</div>
-               <div className="text-white font-black uppercase text-[10px] tracking-widest opacity-80">Adicionado</div>
+          <div className="lg:col-span-6 flex justify-center">
+            <div className="relative group cursor-zoom-in">
+              <div className="absolute inset-0 bg-[#F7E500]/20 rounded-full blur-3xl group-hover:scale-110 transition-transform"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1528825876-01087782d558?auto=format&fit=crop&q=80&w=1200" 
+                alt="Produção Bananutry" 
+                className="relative z-10 w-full max-w-md h-auto object-contain drop-shadow-2xl rounded-3xl"
+              />
             </div>
           </div>
-
         </div>
 
-        {/* Footer da Página de Produtos - Lista Final */}
-        <div className="mt-24 pt-10 border-t-2 border-[#4B3621]/10">
-           <h4 className="text-center font-black uppercase text-[#4B3621] mb-10 tracking-[0.3em] text-xs">Excelência e Tradição na linha de Doces Premium</h4>
-           <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
-              {flavors.map((f, i) => (
-                <div key={i} className="flex items-center gap-2 group cursor-default">
-                  <CheckCircle2 size={14} className="text-[#F7E500] group-hover:scale-125 transition-transform" />
-                  <span className="text-[11px] font-black uppercase text-[#4B3621] group-hover:text-amber-700 transition-colors">{f}</span>
-                </div>
-              ))}
-           </div>
+        {/* Footer da Página de Produtos */}
+        <div className="mt-24 pt-10 border-t-2 border-[#4B3621]/10 text-center">
+           <h4 className="font-black uppercase text-[#4B3621] mb-10 tracking-[0.3em] text-xs">Excelência e Tradição na linha de Doces Premium</h4>
+           <Link to="/contato" className="bg-[#4B3621] text-white px-10 py-5 rounded-2xl font-black uppercase text-sm hover:scale-105 transition-transform inline-block shadow-xl">
+              Falar com nosso time comercial agora
+           </Link>
         </div>
 
       </div>
