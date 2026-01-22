@@ -14,6 +14,12 @@ export interface StyledProduct extends Product {
   bgColor: string;
 }
 
+/**
+ * COMO ADICIONAR IMAGENS:
+ * 1. Suba sua foto para um serviço de hospedagem (Imgur, Cloudinary, ou o próprio GitHub).
+ * 2. Cole o link direto da imagem na propriedade 'image' abaixo.
+ * 3. Se deixar vazio (''), o site mostrará automaticamente o ícone de "Espaço para Foto".
+ */
 export const PRODUCTS: StyledProduct[] = [
   {
     id: 'natural',
@@ -22,7 +28,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: '100% banana',
     benefits: ['Sem Adição de Açúcar', 'Sem Glúten', '100% Banana'],
-    image: '', 
+    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=3', // Exemplo de imagem populada
     accentColor: '#F7E500',
     bgColor: '#FEFCE8'
   },
@@ -33,7 +39,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Ameixa',
     benefits: ['Fonte de Fibras', 'Sem Glúten', 'Sem Adição de Açúcar'],
-    image: '',
+    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=5', // Deixando vazio para mostrar o placeholder
     accentColor: '#E11D48',
     bgColor: '#FFF1F2'
   },
@@ -44,7 +50,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Uva Passa',
     benefits: ['Sem Adição de Açúcar', 'Fonte de Fibras', 'Sem Glúten'],
-    image: '',
+    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=4',
     accentColor: '#7C3AED',
     bgColor: '#F5F3FF'
   },
@@ -55,7 +61,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Polpa de Açaí',
     benefits: ['Energia Natural', 'Sem Glúten', 'Baixo Sódio'],
-    image: '',
+    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=1',
     accentColor: '#4C1D95',
     bgColor: '#F3E8FF'
   },
@@ -66,7 +72,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Castanha-do-Pará',
     benefits: ['Fonte de Potássio', 'Sem Glúten', 'Sabor Premium'],
-    image: '',
+    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=2',
     accentColor: '#78350F',
     bgColor: '#FEF3C7'
   }
