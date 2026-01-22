@@ -32,7 +32,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: '100% banana',
     benefits: ['Sem Adição de Açúcar', 'Sem Glúten', '100% Banana'],
-    image: 'https://images.unsplash.com/photo-1528825876-01087782d558?auto=format&fit=crop&q=80&w=600', 
+    image: 'https://i.postimg.cc/y6DJSsZR/Sabor-natural.jpg', 
     accentColor: '#F7E500',
     bgColor: '#FEFCE8'
   },
@@ -43,7 +43,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Ameixa',
     benefits: ['Fonte de Fibras', 'Sem Glúten', 'Sem Adição de Açúcar'],
-    image: 'https://images.unsplash.com/photo-1628114004690-36696775691e?auto=format&fit=crop&q=80&w=600', 
+    image: 'https://i.postimg.cc/1RFmQtFR/Sabor-ameixa.jpg', 
     accentColor: '#E11D48',
     bgColor: '#FFF1F2'
   },
@@ -54,7 +54,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Uva Passa',
     benefits: ['Sem Adição de Açúcar', 'Fonte de Fibras', 'Sem Glúten'],
-    image: 'https://images.unsplash.com/photo-1590483736622-39da8af7ecb1?auto=format&fit=crop&q=80&w=600',
+    image: 'https://i.postimg.cc/Wpq318Bk/Sabor-uvas-passas.jpg',
     accentColor: '#7C3AED',
     bgColor: '#F5F3FF'
   },
@@ -65,7 +65,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Polpa de Açaí',
     benefits: ['Energia Natural', 'Sem Glúten', 'Baixo Sódio'],
-    image: 'https://images.unsplash.com/photo-1518534873429-89285a344d5e?auto=format&fit=crop&q=80&w=600',
+    image: 'https://i.postimg.cc/dtBKsTV2/Sabor-acai.jpg',
     accentColor: '#4C1D95',
     bgColor: '#F3E8FF'
   },
@@ -76,7 +76,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Castanha-do-Pará',
     benefits: ['Fonte de Potássio', 'Sem Glúten', 'Sabor Premium'],
-    image: 'https://images.unsplash.com/photo-1590080873974-9a38586fab57?auto=format&fit=crop&q=80&w=600',
+    image: 'https://i.postimg.cc/50CVb7XX/Sabor-castanha.jpg',
     accentColor: '#78350F',
     bgColor: '#FEF3C7'
   }
