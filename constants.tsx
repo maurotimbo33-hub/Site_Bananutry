@@ -4,9 +4,9 @@ import { Leaf, ShieldCheck, Factory, Package, TrendingUp } from 'lucide-react';
 import { Product } from './types';
 
 export const COLORS = {
-  primary: '#F7E500', // Amarelo Bananutry vibrante
-  secondary: '#4B3621', // Marrom Escuro Industrial
-  accent: '#059669', // Verde Saudável
+  primary: '#F7E500', 
+  secondary: '#4B3621', 
+  accent: '#059669', 
 };
 
 export interface StyledProduct extends Product {
@@ -15,9 +15,14 @@ export interface StyledProduct extends Product {
 }
 
 /**
- * NOTA SOBRE IMAGENS:
- * Links de redes sociais (Instagram/Facebook) não funcionam diretamente.
- * Use links diretos de arquivos (.jpg, .png) ou hospede suas fotos em serviços como Imgur.
+ * IMPORTANTE SOBRE AS FOTOS:
+ * O Instagram não permite que você use os links deles aqui (eles bloqueiam imagens externas).
+ * 
+ * O QUE FAZER:
+ * 1. Use o site https://postimages.org (é grátis e não precisa de conta).
+ * 2. Faça o upload da sua foto lá.
+ * 3. Copie o "LINK DIRETO" (ele deve terminar em .jpg ou .png).
+ * 4. Cole esse link direto entre as aspas na propriedade 'image' abaixo.
  */
 export const PRODUCTS: StyledProduct[] = [
   {
