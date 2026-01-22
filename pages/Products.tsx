@@ -127,7 +127,7 @@ const Products: React.FC = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-[#F7E500]/20 rounded-full blur-3xl group-hover:scale-110 transition-transform"></div>
               <img 
-                src="https://images.unsplash.com/photo-1528825876-01087782d558?auto=format&fit=crop&q=80&w=1200" 
+                src="https://i.postimg.cc/Jn4pQGW5/Banana.jpg" 
                 alt="Produção Bananutry" 
                 className="relative z-10 w-full max-w-md h-auto object-contain drop-shadow-2xl rounded-3xl"
               />
