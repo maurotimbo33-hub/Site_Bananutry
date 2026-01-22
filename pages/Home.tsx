@@ -100,7 +100,7 @@ const Home: React.FC = () => {
              </div>
              <div className="md:w-1/2 flex justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1590080875515-8a03b1447d1a?auto=format&fit=crop&q=80&w=600" 
+                  src="https://i.postimg.cc/PxT5Vn3r/Bala-de-Banana.jpg" 
                   className="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-500"
                   alt="Balas de Banana"
                 />
