@@ -15,10 +15,9 @@ export interface StyledProduct extends Product {
 }
 
 /**
- * COMO ADICIONAR IMAGENS:
- * 1. Suba sua foto para um serviço de hospedagem (Imgur, Cloudinary, ou o próprio GitHub).
- * 2. Cole o link direto da imagem na propriedade 'image' abaixo.
- * 3. Se deixar vazio (''), o site mostrará automaticamente o ícone de "Espaço para Foto".
+ * NOTA SOBRE IMAGENS:
+ * Links de redes sociais (Instagram/Facebook) não funcionam diretamente.
+ * Use links diretos de arquivos (.jpg, .png) ou hospede suas fotos em serviços como Imgur.
  */
 export const PRODUCTS: StyledProduct[] = [
   {
@@ -28,7 +27,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: '100% banana',
     benefits: ['Sem Adição de Açúcar', 'Sem Glúten', '100% Banana'],
-    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=3', // Exemplo de imagem populada
+    image: 'https://images.unsplash.com/photo-1528825876-01087782d558?auto=format&fit=crop&q=80&w=600', 
     accentColor: '#F7E500',
     bgColor: '#FEFCE8'
   },
@@ -39,7 +38,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Ameixa',
     benefits: ['Fonte de Fibras', 'Sem Glúten', 'Sem Adição de Açúcar'],
-    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=5', // Deixando vazio para mostrar o placeholder
+    image: 'https://images.unsplash.com/photo-1628114004690-36696775691e?auto=format&fit=crop&q=80&w=600', 
     accentColor: '#E11D48',
     bgColor: '#FFF1F2'
   },
@@ -50,7 +49,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Uva Passa',
     benefits: ['Sem Adição de Açúcar', 'Fonte de Fibras', 'Sem Glúten'],
-    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=4',
+    image: 'https://images.unsplash.com/photo-1590483736622-39da8af7ecb1?auto=format&fit=crop&q=80&w=600',
     accentColor: '#7C3AED',
     bgColor: '#F5F3FF'
   },
@@ -61,7 +60,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Polpa de Açaí',
     benefits: ['Energia Natural', 'Sem Glúten', 'Baixo Sódio'],
-    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=1',
+    image: 'https://images.unsplash.com/photo-1518534873429-89285a344d5e?auto=format&fit=crop&q=80&w=600',
     accentColor: '#4C1D95',
     bgColor: '#F3E8FF'
   },
@@ -72,7 +71,7 @@ export const PRODUCTS: StyledProduct[] = [
     packaging: 'Pacotes de 280g',
     ingredients: 'Banana e Castanha-do-Pará',
     benefits: ['Fonte de Potássio', 'Sem Glúten', 'Sabor Premium'],
-    image: 'https://www.instagram.com/p/DIvC6TiuMxZ/?img_index=2',
+    image: 'https://images.unsplash.com/photo-1590080873974-9a38586fab57?auto=format&fit=crop&q=80&w=600',
     accentColor: '#78350F',
     bgColor: '#FEF3C7'
   }
