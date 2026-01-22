@@ -11,11 +11,11 @@ const Footer: React.FC = () => {
         <div>
           <h3 className="text-[#F7E500] text-3xl font-black mb-6 uppercase tracking-tighter italic">BANANUTRY</h3>
           <p className="text-white/60 text-sm leading-relaxed font-medium">
-            Saber que nutri. Fábrica especializada em doces de banana sem adição de açúcar. Mais de 20 anos de tradição em alimentação saudável para o Brasil.
+            Sabor que nutre. Fábrica especializada em doces de banana sem adição de açúcar. Mais de 20 anos de tradição em alimentação saudável em Brasília.
           </p>
           <div className="flex space-x-4 mt-8">
-            <a href="#" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Instagram size={20} /></a>
-            <a href="#" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Facebook size={20} /></a>
+            <a href="https://www.instagram.com/bananutry_zero_/" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Instagram size={20} /></a>
+            <a href="https://www.facebook.com/Bananutry" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Facebook size={20} /></a>
           </div>
         </div>
 
@@ -47,15 +47,15 @@ const Footer: React.FC = () => {
           <ul className="space-y-5 text-sm font-medium">
             <li className="flex items-start">
               <MapPin size={20} className="mr-4 text-[#F7E500] shrink-0" />
-              <span>Rua das Bananeiras, 123<br/>Distrito Industrial, Brasil</span>
+              <span>Zona Industrial (Guará)<br/>Brasília-DF</span>
             </li>
             <li className="flex items-center">
               <Phone size={20} className="mr-4 text-[#F7E500] shrink-0" />
-              <span>(00) 0000-0000</span>
+              <span>(61) 99991-3281</span>
             </li>
             <li className="flex items-center">
               <Mail size={20} className="mr-4 text-[#F7E500] shrink-0" />
-              <span>comercial@bananutry.com.br</span>
+              <span>comercial.bananutry@gmail.com</span>
             </li>
           </ul>
         </div>

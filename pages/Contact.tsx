@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
               <div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-6 uppercase">Fale Conosco</h1>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  Entre em contato com nosso time comercial e saiba como revender os produtos Bananutry em sua região.
+                  Entre em contato com nosso time comercial e saiba como revender os produtos Bananutry em sua região. Atendimento especializado para atacado e varejo.
                 </p>
               </div>
 
@@ -31,8 +31,8 @@ const Contact: React.FC = () => {
                     <Phone className="text-amber-900" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">WhatsApp Comercial</h4>
-                    <p className="text-gray-600">(00) 0000-0000</p>
+                    <h4 className="font-bold text-gray-900">WhatsApp / SAC</h4>
+                    <p className="text-gray-600">(61) 99991-3281</p>
                   </div>
                 </div>
 
@@ -41,8 +41,8 @@ const Contact: React.FC = () => {
                     <Mail className="text-amber-900" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">E-mail</h4>
-                    <p className="text-gray-600">comercial@bananutry.com.br</p>
+                    <h4 className="font-bold text-gray-900">E-mail Comercial</h4>
+                    <p className="text-gray-600">comercial.bananutry@gmail.com</p>
                   </div>
                 </div>
 
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900">Endereço da Fábrica</h4>
-                    <p className="text-gray-600">Rua das Bananeiras, 123 - Distrito Industrial - Brasil</p>
+                    <p className="text-gray-600">Zona Industrial (Guará) - Brasília-DF</p>
                   </div>
                 </div>
               </div>
@@ -90,11 +90,11 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-gray-500 uppercase tracking-widest px-1">Cidade / Estado</label>
-                      <input required type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 focus:ring-2 focus:ring-yellow-400 outline-none transition-all" placeholder="Ex: São Paulo - SP" />
+                      <input required type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 focus:ring-2 focus:ring-yellow-400 outline-none transition-all" placeholder="Ex: Brasília - DF" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-gray-500 uppercase tracking-widest px-1">WhatsApp</label>
-                      <input required type="tel" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 focus:ring-2 focus:ring-yellow-400 outline-none transition-all" placeholder="(00) 00000-0000" />
+                      <input required type="tel" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 focus:ring-2 focus:ring-yellow-400 outline-none transition-all" placeholder="(61) 99991-3281" />
                     </div>
                   </div>
 

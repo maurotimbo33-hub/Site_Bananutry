@@ -4,7 +4,6 @@ import { Building2, Users, ShoppingCart, Dumbbell, Store, LayoutGrid, RotateCcw,
 import { Link } from 'react-router-dom';
 
 const Wholesale: React.FC = () => {
-  // Fix: Leaf is now correctly imported from lucide-react
   const segments = [
     { icon: <Users />, label: 'Distribuidores' },
     { icon: <Store />, label: 'Supermercados' },
@@ -69,7 +68,7 @@ const Wholesale: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Fornecimento Contínuo</h3>
-                    <p className="text-gray-600">Estoque garantido e logística eficiente para todo o território nacional.</p>
+                    <p className="text-gray-600">Estoque garantido e logística eficiente de Brasília para todo o Brasil.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -90,8 +89,10 @@ const Wholesale: React.FC = () => {
             <h3 className="text-2xl font-bold text-amber-950 mb-8 uppercase tracking-tight">Pronto para aumentar suas vendas?</h3>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a 
-                href="https://wa.me/5500000000000" 
-                className="bg-amber-950 text-white px-10 py-5 rounded-2xl font-extrabold text-lg transition-transform hover:scale-105"
+                href="https://wa.me/5561999913281" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-amber-950 text-white px-10 py-5 rounded-2xl font-extrabold text-lg transition-transform hover:scale-105 flex items-center justify-center gap-3"
               >
                 Falar com o comercial
               </a>
