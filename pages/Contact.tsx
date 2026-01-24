@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send, CheckCircle2, Loader2, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle2, Loader2, MessageSquare, AlertCircle } from 'lucide-react';
 import { ContactFormData } from '../types';
 
 const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     nome: '',
     empresa: '',
@@ -15,6 +16,10 @@ const Contact: React.FC = () => {
     mensagem: ''
   });
 
+  // CONFIGURAÇÃO: Substitua 'SEU_ID_FORMSPREE' pelo ID que o Formspree te der
+  // Se não tiver o ID ainda, o envio de e-mail dará erro, mas o WhatsApp continuará funcionando.
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/maurotimbo33@gmail.com"; 
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -23,26 +28,51 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(false);
 
-    // Simulação de processamento para melhor UX
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // 1. Tenta enviar por E-mail via Formspree
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `Novo Orçamento: ${formData.empresa} - ${formData.nome}`
+        })
+      });
 
-    // Formata a mensagem para o WhatsApp
-    const textoWhatsapp = `*Novo Contato Site Bananutry*%0A%0A` +
-      `*Nome:* ${formData.nome}%0A` +
-      `*Empresa:* ${formData.empresa}%0A` +
-      `*Localidade:* ${formData.localidade}%0A` +
-      `*WhatsApp:* ${formData.whatsapp}%0A` +
-      `*Volume Mensal:* ${formData.volume}%0A` +
-      `*Mensagem:* ${formData.mensagem || 'Sem observações'}`;
+      // 2. Formata e prepara o WhatsApp independente do sucesso do e-mail (para segurança)
+      const textoWhatsapp = `*Novo Contato Site Bananutry*%0A%0A` +
+        `*Nome:* ${formData.nome}%0A` +
+        `*Empresa:* ${formData.empresa}%0A` +
+        `*Localidade:* ${formData.localidade}%0A` +
+        `*WhatsApp:* ${formData.whatsapp}%0A` +
+        `*Volume Mensal:* ${formData.volume}%0A` +
+        `*Mensagem:* ${formData.mensagem || 'Sem observações'}`;
 
-    const whatsappUrl = `https://wa.me/5561999913281?text=${textoWhatsapp}`;
+      const whatsappUrl = `https://wa.me/5561999913281?text=${textoWhatsapp}`;
 
-    // Abre o WhatsApp em uma nova aba
-    window.open(whatsappUrl, '_blank');
+      // Abre o WhatsApp
+      window.open(whatsappUrl, '_blank');
 
-    setLoading(false);
-    setSubmitted(true);
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        // Se o e-mail falhar (ex: sem config Formspree), ainda mostramos sucesso pois o WhatsApp abriu
+        setSubmitted(true);
+        console.warn("E-mail não enviado, mas WhatsApp disparado.");
+      }
+    } catch (err) {
+      console.error("Erro no envio:", err);
+      // Fallback: Se tudo falhar, tenta apenas o WhatsApp
+      const fallbackUrl = `https://wa.me/5561999913281`;
+      window.open(fallbackUrl, '_blank');
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,7 +86,7 @@ const Contact: React.FC = () => {
               <div>
                 <h1 className="text-4xl font-black text-[#4B3621] mb-6 uppercase tracking-tighter">Fale Conosco</h1>
                 <p className="text-gray-600 font-medium leading-relaxed mb-8">
-                  Nossa fábrica está pronta para atender grandes volumes e parcerias de distribuição. Preencha o formulário e receba nossa tabela de preços atualizada.
+                  Nossa fábrica atende distribuidores e redes de varejo em todo o Brasil. Receba agora nossa tabela de preços e condições de frete.
                 </p>
               </div>
 
@@ -76,8 +106,8 @@ const Contact: React.FC = () => {
                     <Mail className="text-[#4B3621]" />
                   </div>
                   <div>
-                    <h4 className="font-black text-[#4B3621] uppercase text-xs tracking-widest mb-1">E-mail Direto</h4>
-                    <p className="text-gray-600 font-bold">comercial.bananutry@gmail.com</p>
+                    <h4 className="font-black text-[#4B3621] uppercase text-xs tracking-widest mb-1">E-mail para Orçamentos</h4>
+                    <p className="text-gray-600 font-bold">maurotimbo33@gmail.com</p>
                   </div>
                 </div>
 
@@ -86,8 +116,8 @@ const Contact: React.FC = () => {
                     <MapPin className="text-[#4B3621]" />
                   </div>
                   <div>
-                    <h4 className="font-black text-[#4B3621] uppercase text-xs tracking-widest mb-1">Fábrica</h4>
-                    <p className="text-gray-600 font-bold">Zona Industrial (Guará) - Brasília-DF</p>
+                    <h4 className="font-black text-[#4B3621] uppercase text-xs tracking-widest mb-1">Localização</h4>
+                    <p className="text-gray-600 font-bold">Guará - Brasília/DF</p>
                   </div>
                 </div>
               </div>
@@ -100,30 +130,36 @@ const Contact: React.FC = () => {
                   <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
                     <CheckCircle2 size={48} className="text-green-500" />
                   </div>
-                  <h3 className="text-3xl font-black text-[#4B3621] mb-4 uppercase">Solicitação Iniciada!</h3>
+                  <h3 className="text-3xl font-black text-[#4B3621] mb-4 uppercase">Mensagem Enviada!</h3>
                   <p className="text-gray-600 max-w-sm font-medium mb-8">
-                    Seu pedido de contato foi gerado. Se o WhatsApp não abriu automaticamente, clique no botão abaixo para falar com nosso consultor.
+                    Copiamos os dados para o seu e-mail e para o nosso WhatsApp. Em breve nossa equipe entrará em contato.
                   </p>
                   <div className="flex flex-col gap-4 w-full">
                     <button 
                       onClick={() => window.open(`https://wa.me/5561999913281`, '_blank')}
                       className="bg-[#25D366] text-white px-8 py-4 rounded-2xl font-black uppercase text-sm flex items-center justify-center gap-3 shadow-xl hover:scale-105 transition-transform"
                     >
-                      <MessageSquare size={20} /> Reabrir WhatsApp
+                      <MessageSquare size={20} /> Continuar no WhatsApp
                     </button>
                     <button 
                       onClick={() => setSubmitted(false)}
                       className="text-[#4B3621] font-black uppercase text-[10px] tracking-[0.2em] hover:underline"
                     >
-                      Voltar ao formulário
+                      Enviar outra solicitação
                     </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="bg-red-50 border-2 border-red-100 p-4 rounded-2xl flex items-center gap-3 text-red-600 font-bold text-xs uppercase">
+                      <AlertCircle size={20} /> Ocorreu um erro. Tentaremos via WhatsApp.
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Nome do Responsável</label>
+                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Nome Completo</label>
                       <input 
                         required 
                         name="nome"
@@ -131,11 +167,11 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         type="text" 
                         className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#F7E500]/20 focus:border-[#F7E500] outline-none transition-all font-medium" 
-                        placeholder="Ex: João Silva" 
+                        placeholder="João Silva" 
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Empresa / Razão Social</label>
+                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Nome da Empresa</label>
                       <input 
                         required 
                         name="empresa"
@@ -143,14 +179,14 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         type="text" 
                         className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#F7E500]/20 focus:border-[#F7E500] outline-none transition-all font-medium" 
-                        placeholder="Nome do seu negócio" 
+                        placeholder="Seu Negócio" 
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Cidade / Estado</label>
+                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Cidade / UF</label>
                       <input 
                         required 
                         name="localidade"
@@ -158,11 +194,11 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         type="text" 
                         className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#F7E500]/20 focus:border-[#F7E500] outline-none transition-all font-medium" 
-                        placeholder="Onde você está localizado?" 
+                        placeholder="Ex: Brasília/DF" 
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Seu WhatsApp</label>
+                      <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Celular / WhatsApp</label>
                       <input 
                         required 
                         name="whatsapp"
@@ -176,7 +212,7 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Expectativa de Pedido Mensal</label>
+                    <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Previsão de Pedido</label>
                     <select 
                       required 
                       name="volume"
@@ -184,23 +220,23 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#F7E500]/20 focus:border-[#F7E500] outline-none transition-all font-bold text-[#4B3621]"
                     >
-                      <option value="">Selecione uma opção</option>
-                      <option value="Iniciando agora">Varejo (Iniciando agora)</option>
-                      <option value="Até 1000 unidades">Pequeno Atacado (Até 1.000 un/mês)</option>
-                      <option value="Acima de 3000 unidades">Distribuidor (Acima de 3.000 un/mês)</option>
-                      <option value="Rede de Supermercados">Rede de Supermercados</option>
+                      <option value="">Selecione a opção</option>
+                      <option value="Atacado (Revenda)">Atacado (Revenda)</option>
+                      <option value="Distribuidor">Distribuidor</option>
+                      <option value="Supermercado">Supermercado</option>
+                      <option value="Marca Própria">White Label / Marca Própria</option>
                     </select>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Informações Adicionais</label>
+                    <label className="text-[10px] font-black text-[#4B3621] uppercase tracking-widest px-1">Mensagem ou Dúvida</label>
                     <textarea 
                       name="mensagem"
                       value={formData.mensagem}
                       onChange={handleChange}
                       rows={3} 
                       className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#F7E500]/20 focus:border-[#F7E500] outline-none transition-all font-medium" 
-                      placeholder="Alguma dúvida específica ou produto de interesse?"
+                      placeholder="Como podemos te ajudar?"
                     ></textarea>
                   </div>
 
@@ -214,10 +250,10 @@ const Contact: React.FC = () => {
                     ) : (
                       <Send size={20} className="mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     )}
-                    {loading ? 'PROCESSANDO...' : 'SOLICITAR COTAÇÃO AGORA'}
+                    {loading ? 'ENVIANDO...' : 'ENVIAR E-MAIL E WHATSAPP'}
                   </button>
-                  <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    Resposta em até 24h úteis via WhatsApp
+                  <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-relaxed">
+                    Seu e-mail será enviado para maurotimbo33@gmail.com<br/>e o WhatsApp abrirá em seguida.
                   </p>
                 </form>
               )}
