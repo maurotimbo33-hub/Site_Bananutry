@@ -15,4 +15,5 @@ export interface ContactFormData {
   localidade: string;
   whatsapp: string;
   volume: string;
+  mensagem?: string;
 }
