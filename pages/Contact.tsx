@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send, CheckCircle2, Loader2, MessageSquare, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Send, CheckCircle2, MessageSquare, ShieldCheck } from 'lucide-react';
 import { ContactFormData } from '../types';
 
 const Contact: React.FC = () => {
-  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     nome: '',
@@ -15,57 +14,27 @@ const Contact: React.FC = () => {
     mensagem: ''
   });
 
-  // DESTINO: maurotimbo33@gmail.com
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/maurotimbo33@gmail.com"; 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     const textoWhatsapp = `*Novo Orçamento Bananutry*%0A%0A` +
       `*Nome:* ${formData.nome}%0A` +
       `*Empresa:* ${formData.empresa}%0A` +
+      `*Cidade:* ${formData.localidade}%0A` +
       `*WhatsApp:* ${formData.whatsapp}%0A` +
       `*Volume:* ${formData.volume}%0A` +
       `*Mensagem:* ${formData.mensagem || 'Sem observações'}`;
 
-    const whatsappUrl = `https://wa.me/5561999913281?text=${textoWhatsapp}`;
+    const whatsappUrl = `https://wa.me/5561999993281?text=${textoWhatsapp}`;
 
-    try {
-      // Abre o WhatsApp imediatamente para o cliente
-      window.open(whatsappUrl, '_blank');
-
-      // Tenta enviar o e-mail em background via Formspree
-      await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          nome: formData.nome,
-          empresa: formData.empresa,
-          localidade: formData.localidade,
-          whatsapp: formData.whatsapp,
-          volume: formData.volume,
-          mensagem: formData.mensagem,
-          _subject: `Site: Orçamento de ${formData.empresa}`
-        })
-      });
-
-      setSubmitted(true);
-    } catch (err) {
-      console.error("Erro no envio do e-mail:", err);
-      // Mesmo com erro no e-mail, mostramos sucesso pois o WhatsApp foi aberto
-      setSubmitted(true);
-    } finally {
-      setLoading(false);
-    }
+    // Abre o WhatsApp imediatamente para o cliente
+    window.open(whatsappUrl, '_blank');
+    setSubmitted(true);
   };
 
   return (
@@ -78,7 +47,7 @@ const Contact: React.FC = () => {
               <div>
                 <h1 className="text-4xl font-black text-[#4B3621] mb-6 uppercase tracking-tighter italic">Fale Conosco</h1>
                 <p className="text-gray-600 font-medium leading-relaxed">
-                  Nossa fábrica está pronta para atender seu pedido. Receba nossa tabela de preços e condições de frete direto no seu WhatsApp e e-mail.
+                  Nossa fábrica está pronta para atender seu pedido. Receba nossa tabela de preços e condições de frete direto no seu WhatsApp.
                 </p>
               </div>
 
@@ -89,17 +58,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <span className="block text-[10px] font-black text-gray-400 uppercase tracking-widest">WhatsApp Comercial</span>
-                    <span className="text-lg font-black text-[#4B3621]">(61) 99991-3281</span>
-                  </div>
-                </div>
-
-                <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6 group hover:border-[#F7E500] transition-colors">
-                  <div className="bg-[#F7E500] p-4 rounded-2xl text-[#4B3621]">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-black text-gray-400 uppercase tracking-widest">E-mail Direto</span>
-                    <span className="text-lg font-black text-[#4B3621] text-xs sm:text-lg">maurotimbo33@gmail.com</span>
+                    <span className="text-lg font-black text-[#4B3621]">(61) 99999-3281</span>
                   </div>
                 </div>
 
@@ -123,12 +82,12 @@ const Contact: React.FC = () => {
                   </div>
                   <h3 className="text-3xl font-black text-[#4B3621] mb-4 uppercase">Solicitação Enviada!</h3>
                   <p className="text-gray-600 font-medium mb-10 max-w-xs mx-auto">
-                    Obrigado pelo contato! O WhatsApp comercial foi aberto e sua mensagem foi enviada para nossa equipe.
+                    Obrigado pelo interesse! O WhatsApp comercial foi aberto com seus dados preenchidos para agilizar seu atendimento.
                   </p>
                   
                   <div className="flex flex-col gap-4">
                     <button 
-                      onClick={() => window.open(`https://wa.me/5561999913281`, '_blank')}
+                      onClick={() => window.open(`https://wa.me/5561999993281`, '_blank')}
                       className="bg-[#25D366] text-white py-5 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center justify-center gap-3 hover:scale-105 transition-transform"
                     >
                       <MessageSquare size={20} /> Abrir WhatsApp Novamente
@@ -181,15 +140,10 @@ const Contact: React.FC = () => {
 
                   <button 
                     type="submit" 
-                    disabled={loading}
-                    className="w-full bg-[#4B3621] hover:bg-black text-white font-black text-lg py-5 rounded-2xl flex items-center justify-center transition-all shadow-xl disabled:opacity-70 group"
+                    className="w-full bg-[#4B3621] hover:bg-black text-white font-black text-lg py-5 rounded-2xl flex items-center justify-center transition-all shadow-xl group"
                   >
-                    {loading ? (
-                      <Loader2 className="animate-spin mr-3" />
-                    ) : (
-                      <Send size={20} className="mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    )}
-                    {loading ? 'ENVIANDO...' : 'SOLICITAR ORÇAMENTO'}
+                    <Send size={20} className="mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    SOLICITAR ORÇAMENTO VIA WHATSAPP
                   </button>
                   
                   <div className="flex items-center justify-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-widest">

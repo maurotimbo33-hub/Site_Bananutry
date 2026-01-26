@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, MapPin, Phone, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Instagram, Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -51,11 +51,7 @@ const Footer: React.FC = () => {
             </li>
             <li className="flex items-center">
               <Phone size={20} className="mr-4 text-[#F7E500] shrink-0" />
-              <span>(61) 99991-3281</span>
-            </li>
-            <li className="flex items-center">
-              <Mail size={20} className="mr-4 text-[#F7E500] shrink-0" />
-              <span>maurotimbo33@gmail.com</span>
+              <span>(61) 99999-3281</span>
             </li>
           </ul>
         </div>

@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
 import Wholesale from './pages/Wholesale';
 import Quality from './pages/Quality';
 import Contact from './pages/Contact';
@@ -30,6 +31,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<About />} />
             <Route path="/produtos" element={<Products />} />
+            <Route path="/produtos/:id" element={<ProductDetail />} />
             <Route path="/atacado" element={<Wholesale />} />
             <Route path="/qualidade" element={<Quality />} />
             <Route path="/contato" element={<Contact />} />

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Banana, CheckCircle2, Zap, Star, Award, ImagePlus, ShoppingBag } from 'lucide-react';
+import { Banana, CheckCircle2, Zap, Star, Award, ImagePlus, ShoppingBag, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
 
@@ -55,14 +55,14 @@ const Products: React.FC = () => {
               <div key={product.id} className="bg-white rounded-[3rem] p-6 border-2 border-transparent hover:border-[#F7E500] transition-all shadow-lg hover:shadow-2xl group flex flex-col h-full">
                 
                 {/* Imagem do Produto com Fallback Automático */}
-                <div className="relative aspect-square mb-8 bg-gray-50 rounded-[2.5rem] border-4 border-dashed border-gray-100 flex items-center justify-center overflow-hidden group-hover:bg-yellow-50/50 transition-colors">
+                <Link to={`/produtos/${product.id}`} className="relative aspect-square mb-8 bg-gray-50 rounded-[2.5rem] border-4 border-dashed border-gray-100 flex items-center justify-center overflow-hidden group-hover:bg-yellow-50/50 transition-colors cursor-pointer">
                   <ImageWithFallback src={product.image} alt={product.name} productName={product.name} />
                   
                   {/* Badge de Peso */}
                   <div className="absolute top-4 right-4 bg-[#4B3621] text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
                     {product.weight}
                   </div>
-                </div>
+                </Link>
 
                 {/* Info do Produto */}
                 <div className="flex-grow text-center px-4">
@@ -77,7 +77,7 @@ const Products: React.FC = () => {
                   <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">{product.packaging}</p>
                   
                   <div className="space-y-2 mb-8">
-                    {product.benefits.map((benefit, i) => (
+                    {product.benefits.slice(0, 3).map((benefit, i) => (
                       <div key={i} className="flex items-center justify-center gap-2 text-[11px] font-black text-[#4B3621]/70 uppercase">
                         <CheckCircle2 size={12} className="text-green-500" />
                         {benefit}
@@ -86,13 +86,13 @@ const Products: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Botão de CTA */}
+                {/* Botão de Detalhes */}
                 <Link 
-                  to="/contato" 
-                  className="mt-auto bg-gray-50 hover:bg-[#4B3621] text-[#4B3621] hover:text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all border-2 border-gray-100 hover:border-[#4B3621] flex items-center justify-center gap-2"
+                  to={`/produtos/${product.id}`} 
+                  className="mt-auto bg-gray-50 hover:bg-[#F7E500] text-[#4B3621] py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all border-2 border-gray-100 hover:border-[#F7E500] flex items-center justify-center gap-2"
                 >
-                  <ShoppingBag size={14} />
-                  Solicitar Cotação
+                  <Eye size={14} />
+                  Ver Detalhes do Sabor
                 </Link>
               </div>
             ))}

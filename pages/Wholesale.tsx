@@ -89,7 +89,7 @@ const Wholesale: React.FC = () => {
             <h3 className="text-2xl font-bold text-amber-950 mb-8 uppercase tracking-tight">Pronto para aumentar suas vendas?</h3>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a 
-                href="https://wa.me/5561999913281" 
+                href="https://wa.me/5561999993281" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-amber-950 text-white px-10 py-5 rounded-2xl font-extrabold text-lg transition-transform hover:scale-105 flex items-center justify-center gap-3"
