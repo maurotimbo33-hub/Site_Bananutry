@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Phone, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -13,10 +13,6 @@ const Footer: React.FC = () => {
           <p className="text-white/60 text-sm leading-relaxed font-medium">
             Sabor que nutre. Fábrica especializada em doces de banana sem adição de açúcar. Mais de 20 anos de tradição em alimentação saudável em Brasília.
           </p>
-          <div className="flex space-x-4 mt-8">
-            <a href="https://www.instagram.com/bananutry_zero_/" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Instagram size={20} /></a>
-            <a href="https://www.facebook.com/Bananutry" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-[#F7E500] hover:text-[#4B3621] transition-all"><Facebook size={20} /></a>
-          </div>
         </div>
 
         {/* Links */}
