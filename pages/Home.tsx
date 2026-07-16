@@ -5,6 +5,8 @@ import { ChevronRight, ArrowRight, Award } from 'lucide-react';
 import { PRODUCTS, DIFFERENTIALS } from '../constants';
 
 const Home: React.FC = () => {
+  const nibsProduct = PRODUCTS.find(p => p.id === 'nibs-cacau');
+  const nibsCacauImg = nibsProduct ? nibsProduct.image : '';
   return (
     <div>
       {/* Hero Section - Estilo Banner Imagem 1 */}
@@ -85,24 +87,30 @@ const Home: React.FC = () => {
                   <Award className="text-[#4B3621]" size={40} />
                   <h2 className="text-3xl font-black text-[#4B3621] uppercase">Lançamento!</h2>
                 </div>
-                <h3 className="text-5xl font-black text-[#4B3621] mb-6 leading-tight">Balas de Banana</h3>
+                <h3 className="text-4xl md:text-5xl font-black text-[#4B3621] mb-2 leading-tight uppercase">Bananada + Cacau 100%</h3>
+                <h4 className="text-2xl font-black text-[#4B3621] mb-6 italic opacity-90">Com Nibs de Cacau</h4>
                 <p className="text-xl text-[#4B3621]/80 mb-8 font-medium">
-                  A nutrição que você já conhece, agora também na versão de balas. Disponível nos tamanhos 150g, 250g e 500g.
+                  A união perfeita da doçura natural da banana com o sabor marcante do cacau 100% puro e a crocância irresistível dos nibs de cacau. Ideal para pré e pós-treino, rico em potássio e fonte natural de energia limpa.
                 </p>
-                <div className="flex flex-wrap gap-4 mb-8">
-                  {['150g', '250g', '500g'].map(size => (
-                    <span key={size} className="bg-[#4B3621] text-white px-5 py-2 rounded-xl font-black text-sm">{size}</span>
+                <div className="flex flex-wrap gap-2.5 mb-8">
+                  {['Zero Adição de Açúcar', 'Cacau 100% Puro', 'Com Nibs Crocantes', 'Ideal para Pré/Pós-Treino', 'Zero Glúten & Lactose'].map(benefit => (
+                    <span key={benefit} className="bg-[#4B3621] text-white px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wide">{benefit}</span>
                   ))}
                 </div>
-                <Link to="/contato" className="inline-block bg-white hover:bg-black hover:text-white text-[#4B3621] px-10 py-5 rounded-2xl font-black uppercase shadow-lg transition-all">
-                  Quero no meu PDV
-                </Link>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/produtos/nibs-cacau" className="inline-block bg-[#4B3621] hover:bg-black text-white px-8 py-4 rounded-2xl font-black uppercase shadow-lg transition-all text-sm">
+                    Ver Detalhes
+                  </Link>
+                  <Link to="/contato" className="inline-block bg-white hover:bg-gray-100 text-[#4B3621] px-8 py-4 rounded-2xl font-black uppercase shadow-lg transition-all text-sm">
+                    Quero no meu PDV
+                  </Link>
+                </div>
              </div>
              <div className="md:w-1/2 flex justify-center">
                 <img 
-                  src="https://i.postimg.cc/PxT5Vn3r/Bala-de-Banana.jpg" 
-                  className="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-500"
-                  alt="Balas de Banana"
+                  src={nibsCacauImg} 
+                  className="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-500 max-h-[450px] object-cover"
+                  alt="Bananada com Nibs de Cacau"
                 />
              </div>
           </div>
