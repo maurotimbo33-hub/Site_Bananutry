@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Banana, CheckCircle2, Zap, Star, Award, ImagePlus, ShoppingBag, Eye } from 'lucide-react';
+import { Banana, CheckCircle2, Zap, Star, Award, ImagePlus, ShoppingBag, Eye, Sparkles, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
 
@@ -33,33 +33,94 @@ const ImageWithFallback = ({ src, alt, productName }: { src: string, alt: string
 };
 
 const Products: React.FC = () => {
+  const [filter, setFilter] = useState<'all' | 'new' | 'classic'>('all');
+
+  const filteredProducts = PRODUCTS.filter((p) => {
+    if (filter === 'new') return p.isNew;
+    if (filter === 'classic') return !p.isNew;
+    return true;
+  });
+
   return (
     <div className="pt-24 pb-20 bg-[#FFFBEB] min-h-screen">
       <div className="container mx-auto px-4">
         
         {/* Banner Superior */}
-        <div className="flex justify-center mb-16">
-          <div className="bg-[#4B3621] px-12 py-3 rounded-xl shadow-xl transform -rotate-1 relative overflow-hidden group">
+        <div className="flex flex-col items-center justify-center mb-12 text-center">
+          <div className="bg-[#4B3621] px-12 py-3 rounded-xl shadow-xl transform -rotate-1 relative overflow-hidden group mb-4">
             <div className="absolute inset-0 bg-white/5 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
             <h2 className="text-white text-2xl md:text-3xl font-black uppercase tracking-widest relative z-10">
               Catálogo de Produtos
             </h2>
             <p className="text-[#F7E500] text-center text-sm font-bold uppercase relative z-10">Qualidade Industrial • Sabor Natural</p>
           </div>
+          <p className="text-gray-600 max-w-2xl font-medium mt-2">
+            Conheça nossa linha completa de doces de banana sem adição de açúcar, incluindo os novos lançamentos funcionais para o seu dia a dia e treino.
+          </p>
+
+          {/* Filtros de Categoria */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <button
+              onClick={() => setFilter('all')}
+              className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                filter === 'all'
+                  ? 'bg-[#4B3621] text-white shadow-lg scale-105'
+                  : 'bg-white hover:bg-amber-100/70 text-[#4B3621] border border-amber-200'
+              }`}
+            >
+              Todos os Sabores ({PRODUCTS.length})
+            </button>
+            <button
+              onClick={() => setFilter('new')}
+              className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                filter === 'new'
+                  ? 'bg-[#F7E500] text-[#4B3621] shadow-lg ring-2 ring-[#4B3621] scale-105'
+                  : 'bg-white hover:bg-yellow-50 text-[#4B3621] border border-yellow-300'
+              }`}
+            >
+              <Sparkles size={14} className="text-[#4B3621]" />
+              Novos Lançamentos ({PRODUCTS.filter(p => p.isNew).length})
+            </button>
+            <button
+              onClick={() => setFilter('classic')}
+              className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                filter === 'classic'
+                  ? 'bg-[#4B3621] text-white shadow-lg scale-105'
+                  : 'bg-white hover:bg-amber-100/70 text-[#4B3621] border border-amber-200'
+              }`}
+            >
+              Linha Tradicional ({PRODUCTS.filter(p => !p.isNew).length})
+            </button>
+          </div>
         </div>
 
         {/* Grid de Produtos */}
         <div className="max-w-7xl mx-auto mb-24">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {PRODUCTS.map((product) => (
-              <div key={product.id} className="bg-white rounded-[3rem] p-6 border-2 border-transparent hover:border-[#F7E500] transition-all shadow-lg hover:shadow-2xl group flex flex-col h-full">
+            {filteredProducts.map((product) => (
+              <div 
+                key={product.id} 
+                className={`bg-white rounded-[3rem] p-6 border-2 transition-all shadow-lg hover:shadow-2xl group flex flex-col h-full relative ${
+                  product.isNew 
+                    ? 'border-[#F7E500] ring-2 ring-[#F7E500]/30' 
+                    : 'border-transparent hover:border-[#F7E500]'
+                }`}
+              >
                 
                 {/* Imagem do Produto com Fallback Automático */}
                 <Link to={`/produtos/${product.id}`} className="relative aspect-square mb-8 bg-gray-50 rounded-[2.5rem] border-4 border-dashed border-gray-100 flex items-center justify-center overflow-hidden group-hover:bg-yellow-50/50 transition-colors cursor-pointer">
                   <ImageWithFallback src={product.image} alt={product.name} productName={product.name} />
                   
+                  {/* Badge de Lançamento se aplicável */}
+                  {product.isNew && (
+                    <div className="absolute top-4 left-4 bg-[#F7E500] text-[#4B3621] px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 shadow-md border border-[#4B3621]/10">
+                      <Sparkles size={12} className="text-[#4B3621]" />
+                      <span>{product.badge || 'Lançamento'}</span>
+                    </div>
+                  )}
+
                   {/* Badge de Peso */}
-                  <div className="absolute top-4 right-4 bg-[#4B3621] text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+                  <div className="absolute top-4 right-4 bg-[#4B3621] text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow">
                     {product.weight}
                   </div>
                 </Link>
@@ -89,7 +150,11 @@ const Products: React.FC = () => {
                 {/* Botão de Detalhes */}
                 <Link 
                   to={`/produtos/${product.id}`} 
-                  className="mt-auto bg-gray-50 hover:bg-[#F7E500] text-[#4B3621] py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all border-2 border-gray-100 hover:border-[#F7E500] flex items-center justify-center gap-2"
+                  className={`mt-auto py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all border-2 flex items-center justify-center gap-2 ${
+                    product.isNew 
+                      ? 'bg-[#F7E500] hover:bg-[#4B3621] text-[#4B3621] hover:text-white border-[#F7E500] hover:border-[#4B3621] shadow-md'
+                      : 'bg-gray-50 hover:bg-[#F7E500] text-[#4B3621] border-gray-100 hover:border-[#F7E500]'
+                  }`}
                 >
                   <Eye size={14} />
                   Ver Detalhes do Sabor

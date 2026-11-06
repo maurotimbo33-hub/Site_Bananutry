@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, Sparkles, Flame, Zap, Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Award, Sparkles, Flame, Zap, Check, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { DIFFERENTIALS } from '../constants';
 
 interface LaunchFlavor {
@@ -44,7 +44,7 @@ const NEW_LAUNCHES: LaunchFlavor[] = [
     tagline: 'O Toque Clássico e Aromático da Canela Pura',
     subtitle: 'Com Canela Selecionada',
     description: 'O calor aconchegante da canela em pó pura encontra a doçura natural e maciez da banana madura selecionada. Um doce aromático com ação naturalmente termogênica, ideal para estimular o metabolismo e trazer sensação de bem-estar com energia limpa.',
-    image: '/assets/aistudio/image_65eeb16e.png',
+    image: 'https://i.postimg.cc/T208Lcyt/Canela.png',
     icon: 'flame',
     packaging: 'Pacotes de 280g',
     weight: '28g unid. / 280g pacote',
@@ -83,7 +83,7 @@ const NEW_LAUNCHES: LaunchFlavor[] = [
     tagline: 'O Poder do Mirtilo com Toda a Energia da Banana',
     subtitle: 'Com Blueberry Nobre',
     description: 'A sofisticação do blueberry (mirtilo) em perfeita harmonia com o doce da banana. Uma fonte nobre de antocianinas e antioxidantes que atuam contra os radicais livres, proporcionando um sabor levemente frutado, refrescante e revigorante.',
-    image: '/assets/aistudio/image_2d2511a0.png',
+    image: 'https://i.postimg.cc/jqcVwhWc/Bluebarry.png',
     icon: 'sparkles',
     packaging: 'Pacote 28g / Pacotes 280g',
     weight: '28g individual',
@@ -122,7 +122,7 @@ const NEW_LAUNCHES: LaunchFlavor[] = [
     tagline: '10% de Whey Protein com Carboidrato Natural da Fruta',
     subtitle: 'Aporte Proteico & Recuperação Muscular',
     description: 'A revolução para seu pré e pós-treino: a energia de rápida digestão da banana madura associada a 10% de Whey Protein de alta qualidade. Excelente suporte para recuperação de massa muscular, saciedade e rendimento atlético diário.',
-    image: '/assets/aistudio/image_71aaa08e.png',
+    image: 'https://i.postimg.cc/44PC71KB/Whey.png',
     icon: 'zap',
     packaging: 'Pacotes de 280g',
     weight: '28g unid. / 280g pacote',
@@ -365,19 +365,26 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* Botões de Ação */}
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3.5">
+                  <Link 
+                    to={`/produtos/${currentLaunch.id}`}
+                    className="bg-white/95 hover:bg-white text-[#4B3621] px-7 py-4 rounded-2xl font-black uppercase shadow-lg hover:scale-105 active:scale-95 transition-all text-sm tracking-wide text-center flex items-center justify-center gap-2 border-2 border-transparent hover:border-[#4B3621]"
+                  >
+                    <Eye size={18} />
+                    <span>Ver Ficha Completa</span>
+                  </Link>
                   <Link 
                     to="/contato" 
-                    className={`${currentLaunch.theme.accentBtn} ${currentLaunch.theme.accentBtnText} px-8 py-4 rounded-2xl font-black uppercase shadow-xl hover:scale-105 active:scale-95 transition-all text-sm tracking-wide text-center flex items-center justify-center gap-2`}
+                    className={`${currentLaunch.theme.accentBtn} ${currentLaunch.theme.accentBtnText} px-7 py-4 rounded-2xl font-black uppercase shadow-xl hover:scale-105 active:scale-95 transition-all text-sm tracking-wide text-center flex items-center justify-center gap-2`}
                   >
                     <span>Quero no meu PDV</span>
                     <ArrowRight size={18} />
                   </Link>
                   <Link 
                     to="/atacado" 
-                    className="bg-white/90 hover:bg-white text-[#4B3621] px-8 py-4 rounded-2xl font-black uppercase shadow-lg hover:scale-105 active:scale-95 transition-all text-sm tracking-wide text-center"
+                    className="bg-black/10 hover:bg-black/20 text-current px-6 py-4 rounded-2xl font-black uppercase transition-all text-sm tracking-wide text-center backdrop-blur-sm border border-current/20"
                   >
-                    Tabela de Atacado
+                    Tabela Atacado
                   </Link>
                 </div>
               </div>
@@ -468,10 +475,14 @@ const Home: React.FC = () => {
                       <span className="text-xs font-black text-[#4B3621]">
                         {flavor.packaging}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-xs font-black text-[#4B3621] group-hover:translate-x-1 transition-transform">
-                        <span>Ver detalhes</span>
+                      <Link
+                        to={`/produtos/${flavor.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 text-xs font-black text-amber-700 hover:text-amber-950 group-hover:translate-x-1 transition-all"
+                      >
+                        <span>Ficha do produto</span>
                         <ChevronRight size={14} />
-                      </span>
+                      </Link>
                     </div>
                   </div>
                 );

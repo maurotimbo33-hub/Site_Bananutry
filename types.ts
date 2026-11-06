@@ -7,11 +7,12 @@ export interface Product {
   ingredients: string;
   benefits: string[];
   image: string;
-  // Novos campos para páginas individuais
   subtitle: string;
   description: string;
   indicatedFor: string[];
   differentials: string[];
+  isNew?: boolean;
+  badge?: string;
 }
 
 export interface ContactFormData {

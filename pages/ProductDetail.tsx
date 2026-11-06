@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
-import { CheckCircle2, ArrowLeft, MessageSquare, ShoppingBag, Leaf, ShieldCheck, Zap } from 'lucide-react';
+import { CheckCircle2, ArrowLeft, MessageSquare, ShoppingBag, Leaf, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,18 +45,29 @@ const ProductDetail: React.FC = () => {
                 alt={product.name} 
                 className="w-full h-auto object-contain max-w-md transform hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute top-8 right-8 bg-[#4B3621] text-white px-6 py-2 rounded-full font-black text-sm uppercase tracking-tighter">
+              <div className="absolute top-8 right-8 bg-[#4B3621] text-white px-6 py-2 rounded-full font-black text-sm uppercase tracking-tighter shadow-md">
                 {product.weight} • {product.packaging}
               </div>
+              {product.isNew && (
+                <div className="absolute top-8 left-8 bg-[#F7E500] text-[#4B3621] px-5 py-2 rounded-full font-black text-xs uppercase tracking-wider shadow-md flex items-center gap-1.5 border border-[#4B3621]/10">
+                  <Sparkles size={14} />
+                  <span>{product.badge || 'Lançamento'}</span>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Product Info Section */}
           <div className="space-y-10">
             <div>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <span className="w-12 h-[2px] bg-[#F7E500]"></span>
                 <span className="text-xs font-black uppercase tracking-[0.3em] text-gray-400">Linha Saudável</span>
+                {product.isNew && (
+                  <span className="inline-flex items-center gap-1 bg-[#F7E500] text-[#4B3621] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">
+                    <Sparkles size={12} /> {product.badge || 'Novo Lançamento'}
+                  </span>
+                )}
               </div>
               <h1 className="text-5xl md:text-6xl font-black text-[#4B3621] uppercase tracking-tighter leading-none mb-6">
                 {product.name}
